@@ -10,7 +10,7 @@
             <button class="btn-next" @click="playNextMusic" :disabled="playBtnDisabledAttr" ></button>
         </div>
         <div class="play">
-            <p @dblclick="toggleLyricPanel">
+            <p>
                 <template v-if="noSongPlay === true">
                     当前暂无正在播放的音乐，开启您的音乐之旅吧~
                 </template>
@@ -22,6 +22,7 @@
                 <span class="time">
                     {{ currentPlayTime || "00:00" }} / {{ durationTime || "00:00"}}
                 </span>
+                <span class="player-lyric" @click="toggleLyricPanel">词</span>
             </p>
             <input
                 type="range"
@@ -291,3 +292,12 @@
         },
     }
 </script>
+
+<style>
+    .player-lyric {
+        font-size: 12px;
+        border: 1px solid #eee;
+        margin-left: 10px;
+        padding: 1px 4px;
+    }
+</style>
