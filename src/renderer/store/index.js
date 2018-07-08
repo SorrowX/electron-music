@@ -4,7 +4,7 @@
  
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createLogger from 'vuex/createLogger'
+import createLogger from 'vuex/dist/logger'
 import actions from './actions'
 import getters from './getters'
 import state from './state'

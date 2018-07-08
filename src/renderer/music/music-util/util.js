@@ -1,4 +1,4 @@
-function remove(arr, item){
+export function remove(arr, item){
     if (arr.length) {
         const index = arr.indexOf(item)
         if (index > -1) {
@@ -7,7 +7,7 @@ function remove(arr, item){
     }
 }
 
-function debounce(fn, ms, ctx) {
+export function debounce(fn, ms, ctx) {
     ms || (ms = 150)
     let last, deferTimer
     return function() {
@@ -27,7 +27,7 @@ function debounce(fn, ms, ctx) {
     }
 }
 
-function extendDeep(parent, child) {
+export function extendDeep(parent, child) {
     var i,
         toStr = Object.prototype.toString,
         astr = '[object Array]'
@@ -46,5 +46,3 @@ function extendDeep(parent, child) {
     }
     return child
 }
-
-export { remove, debounce, extendDeep }

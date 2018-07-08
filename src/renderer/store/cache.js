@@ -1,8 +1,8 @@
 /**
  * Created by Sorrow.X on 2018/6/23.
  */
-const { local, session } = require("storage")
-const { remove } = require("../music/music-util/util")
+import { remove } from '../music/music-util/util'
+import { local, session } from '../music/music-util/storage'
 
 /*
  * 往缓存歌曲列表数组中添加一首歌或者多首歌曲

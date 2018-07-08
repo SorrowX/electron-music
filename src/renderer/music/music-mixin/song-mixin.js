@@ -214,24 +214,6 @@ const SongMiXin = {
             this.moveSong({ type, id: musicId })
             this.topSongUpdateNextPlaySongIdx('mySongList')
         },
-        tipMessage(tip, callback) {
-            message_box(
-                {
-                    title: "小葫芦直播管家开播版",
-                    type: 3,
-                    text: tip,
-                    showCheckbox: false,
-                    checkboxLabel: "不再显示",
-                    checkboxChecked: false
-                },
-                this.instance_id,
-                this.class_id,
-                null,
-                (evt, data) => {
-                    callback && callback(data.ok)
-                }
-            )
-        },
         getSongIdx({ type, songId }) {
             let obj = {
                 mySongList: this.mySongList,
