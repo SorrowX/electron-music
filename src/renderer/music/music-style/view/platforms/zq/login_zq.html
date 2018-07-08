@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../css/iview.css">
+    <link rel="stylesheet" href="../../../skin/dark/css/global.css">
+    <link rel="stylesheet" href="../../../skin/dark/css/window.css">
+    <title>小葫芦直播助手开播版</title>
+    <!--<style>-->
+        <!--.no_scroll {-->
+            <!--overflow: hidden;-->
+        <!--}-->
+
+        <!--.rel_position {-->
+            <!--position: relative;-->
+        <!--}-->
+
+        <!--.abs_position {-->
+            <!--position: absolute;-->
+            <!--z-index: 100;-->
+            <!--width: 100%;-->
+            <!--height: 100%;-->
+        <!--}-->
+    <!--</style>-->
+</head>
+
+<body>
+    <!--<div class="container win win-get-code">-->
+        <!--<header>-->
+            <!--<h1>-->
+                <!--<i class="icon-logo"></i>-->
+                <!--登录-->
+            <!--</h1>-->
+            <!--<div class="win-controls">-->
+                <!--<button class="btn-close"></button>-->
+            <!--</div>-->
+        <!--</header>-->
+        <!--<main class="rel_position">-->
+            <!--<webview preload="../../../../src/view/platforms/zq/login_zq_preload.js" id="webview" src="https://www.zhanqi.tv/common/login.html" style="width:100%; height:100%;"-->
+                <!--frameborder=0>-->
+            <!--</webview>-->
+            <!--&lt;!&ndash; loading页面 &ndash;&gt;-->
+            <!--&lt;!&ndash; <div id="wait-login" class="state ing abs_position">-->
+                <!--<i class="icon-dot"></i>-->
+                <!--<span>请稍候...</span>-->
+                <!--<i class="icon"></i>-->
+                <!--<p class="class_text">123</p>-->
+            <!--</div> &ndash;&gt;-->
+            <!--&lt;!&ndash; 获取直播码loaing页面 &ndash;&gt;-->
+            <!--<div id="get-code" class="state ing hidden abs_position">-->
+                <!--<i class="icon-dot"></i>-->
+                <!--<span>获取中...</span>-->
+                <!--<i class="icon"></i>-->
+                <!--<p id="text" class="class_text">获取直播码中,比较耗时...</p>-->
+            <!--</div>-->
+            <!--<div class="footer hidden">-->
+                <!--<a href="javascript:" id="btn-manual" draggable="false">-->
+                    <!--手动获取直播码-->
+                <!--</a>-->
+                <!--<a href="javascript:" id="btn-start" draggable="false">-->
+                    <!--开启直播工具-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</main>-->
+    <!--</div>-->
+    <div id="app"></div>
+    <script>
+        require("../../../../src/view/platforms/zq/login_zq")
+    </script>
+</body>
+
+</html>

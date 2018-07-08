@@ -1,0 +1,93 @@
+.consult-left{
+    overflow: hidden;
+    width: 75%;
+    height: 92%;
+    background: #f60;
+}
+.consult-right{
+    width: 25%;
+    height: 92%;
+    background: #08c;
+}
+.consult-bottom{
+    position:absolute;
+    right: 0;
+    bottom:0;
+    left: 0;
+    height:8%;
+    background: #555;
+}
+
+.app-fade-enter-active, .app-fade-leave-active {
+    transition: opacity .3s ease
+}
+.app-fade-enter, .app-fade-leave-to {
+    opacity: 0
+}
+
+.slide-fade-enter-active {
+    transition: all .3s ease;
+}
+.slide-fade-leave-active {
+    transform: translate3d(0, -100%, 0)
+}
+.slide-fade-enter, .slide-fade-leave-to {
+    transform: translate3d(0, 100%, 0)
+}
+
+.slide-fade2-enter-active {
+    transition: all .3s ease;
+}
+.slide-fade2-enter, .slide-fade2-leave-to {
+    transform: translate3d(0, -100%, 0)
+}
+
+.slide-fade3-enter-active {
+    transition: all .3s ease;
+}
+.slide-fade3-enter, .slide-fade3-leave-to {
+    transform: translate3d(-100%, 0, 0)
+}
+
+.slide-fade4-enter-active {
+    transition: all .3s ease;
+}
+.slide-fade4-enter, .slide-fade4-leave-to {
+    transform: translate3d(100%, 0, 0)
+}
+
+/*.fade-source-move {
+    transition: transform .3s;
+}
+.fade-source-enter-active, .fade-source-leave-active {
+    position: absolute;
+}
+.fade-source-enter, .fade-source-leave-to
+    !* .list-leave-active for below version 2.1.8 *! {
+    opacity: 0;
+    transform: translateY(30px);
+}*/
+
+ .scene ul, .mixer ul {
+     transition-duration: .3s!important;
+ }
+
+.bscroll-vertical-scrollbar {
+    width: 8px;
+    background: transparent;
+	opacity: 0;
+}
+
+.source-list:hover .bscroll-vertical-scrollbar,
+.bscroll-vertical-scrollbar:active {
+	opacity: 1;
+}
+
+.bscroll-indicator {
+    background: #68667b!important;
+    border: none!important;
+}
+
+.bscroll-indicator:hover {
+    background: #68667b!important;
+}

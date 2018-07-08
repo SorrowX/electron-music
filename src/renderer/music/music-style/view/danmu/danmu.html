@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>小葫芦直播助手开播版</title>
+    <link rel="stylesheet" href="../../skin/dark/css/global.css">
+    <link rel="stylesheet" href="../../skin/dark/css/danmu.css">
+    <style>
+        .message-fade-enter-active,
+        .message-fade-leave-active {
+            transition: all 1s;
+        }
+
+        .message-fade-enter,
+        .message-fade-leave-to {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        header {
+            position: relative;
+        }
+
+        .drag {
+            -webkit-app-region: drag;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .gift-fade-enter-active,
+        .gift-fade-leave-active {
+            transition: all 1s;
+        }
+
+        .gift-fade-enter,
+        .gift-fade-leave-to {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        const body = document.querySelector("body");
+
+        body.ondragover = function (ev) {
+            ev.preventDefault();
+            return true;
+        };
+
+        body.ondragenter = function (ev) {
+            /*拖拽元素进入目标元素头上的时候*/
+            return true;
+        };
+
+        body.ondrop = function (ev) {
+            ev.preventDefault();
+        };
+
+        require("../../../src/view/danmu/danmu")
+    </script>
+</body>
+
+</html>

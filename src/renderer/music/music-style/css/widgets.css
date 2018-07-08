@@ -1,0 +1,41 @@
+body {
+    overflow: hidden;
+}
+
+.win-text {
+    height: auto;
+}
+.main-flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+.main-flex-item {
+    flex: 1 100%;
+    margin: 5px 0;
+}
+.win-text .ivu-select-dropdown {
+     margin-right: 0;
+}
+
+.win-text .ivu-color-picker .ivu-select-dropdown {
+    margin-right: -199px;
+}
+
+main {
+    max-height: 480px;
+    overflow: auto;
+}
+
+.win footer {
+    display: flex;
+    padding: 20px 40px;
+    position: relative;
+    z-index: 9999;
+    background: #fff;
+}
+
+.ivu-slider-button {
+    background: #57a3f3;
+}
+
