@@ -21,11 +21,11 @@
             return {
                 btns: [
                     {
-                        name: '观众歌单',
+                        name: '播放记录',
                         class: 'icon-music-nav-audience'
                     },
                     {
-                        name: '我的歌单',
+                        name: '我的歌曲',
                         class: 'icon-music-nav-mine'
                     },
                     {

@@ -6,7 +6,7 @@
 
 ## 效果图如下：
 
-![观众歌曲列表](./dist/img/1.png)
+![播放记录](./dist/img/1.png)
 ![推荐歌单列表](./dist/img/2.png)
 ![歌单详情页](./dist/img/3.png)
 ![热门歌曲](./dist/img/4.png)

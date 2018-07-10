@@ -4,7 +4,7 @@
 <template>
     <div class="tab-pane active">
         <nav class="music-sub-nav">
-            <button class="tab-nav-btn" @click="switchTab(0)" :class="{ 'active': curTabIndex === 0 }">等待播放({{ audienceWaitSongList.length }})</button>
+            <button v-show="false" class="tab-nav-btn" @click="switchTab(0)" :class="{ 'active': curTabIndex === 0 }">等待播放({{ audienceWaitSongList.length }})</button>
             <button class="tab-nav-btn" @click="switchTab(1)" :class="{ 'active': curTabIndex === 1 }">已播放列表</button>
         </nav>
         <div class="tab-content">
@@ -33,7 +33,7 @@
         mixins: [ SongMiXin ],
         data: function () {
             return {
-                curTabIndex: 0
+                curTabIndex: 1
             }
         },
         methods: {
