@@ -7,13 +7,13 @@
 ``` bash
 # 该项目只是用来无聊听听歌的
 效果图如下：
-![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/1.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/2.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/3.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/4.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/5.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/6.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/7.png)
+![观众歌曲列表](https://github.com/SorrowX/electron-music/tree/master/dist/img/1.png)
+![推荐歌单列表](https://github.com/SorrowX/electron-music/tree/master/dist/img/2.png)
+![歌单详情页](https://github.com/SorrowX/electron-music/tree/master/dist/img/3.png)
+![热门歌曲](https://github.com/SorrowX/electron-music/tree/master/dist/img/4.png)
+![歌词页](https://github.com/SorrowX/electron-music/tree/master/dist/img/5.png)
+![搜索结果页](https://github.com/SorrowX/electron-music/tree/master/dist/img/6.png)
+![已播放歌曲列表](https://github.com/SorrowX/electron-music/tree/master/dist/img/7.png)
 
 # 如果想看代码的话
   1.必须会 html + css + js
