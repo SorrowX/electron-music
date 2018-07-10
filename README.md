@@ -4,9 +4,8 @@
 
 #### 说明
 
-``` bash
-# 该项目只是用来无聊听听歌的
-效果图如下：
+## 效果图如下：
+
 ![观众歌曲列表](./dist/img/1.png)
 ![推荐歌单列表](./dist/img/2.png)
 ![歌单详情页](./dist/img/3.png)
@@ -15,13 +14,13 @@
 ![搜索结果页](./dist/img/6.png)
 ![已播放歌曲列表](./dist/img/7.png)
 
-# 如果想看代码的话
+``` bash
+# 该项目只是用来无聊听听歌的，如果想看代码的话
   1.必须会 html + css + js
   2.会使用 vue, vuex
   3.了解 electron桌面框架
 
 ```
-
 
 #### 安装
 
@@ -36,8 +35,3 @@ npm run dev
 npm run build
 
 ```
-
----
-
-
-# electron-music
