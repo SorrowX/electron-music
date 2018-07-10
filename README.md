@@ -7,13 +7,13 @@
 ``` bash
 # 该项目只是用来无聊听听歌的
 效果图如下：
-![image](https://github.com/SorrowX/electron-music/tree/master/build/img/1.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/build/img/2.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/build/img/3.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/build/img/4.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/build/img/5.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/build/img/6.png)
-![image](https://github.com/SorrowX/electron-music/tree/master/build/img/7.png)
+![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/1.png)
+![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/2.png)
+![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/3.png)
+![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/4.png)
+![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/5.png)
+![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/6.png)
+![image](https://github.com/SorrowX/electron-music/tree/master/dist/img/7.png)
 
 # 如果想看代码的话
   1.必须会 html + css + js
