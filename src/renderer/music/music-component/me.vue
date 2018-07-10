@@ -16,7 +16,6 @@
                         <col width="150" />
                         <col width="180" />
                         <col width="70" />
-                        <!--<col width="70" />-->
                     </colgroup>
                     <thead>
                         <tr>
@@ -25,7 +24,6 @@
                             <th>歌手</th>
                             <th>专辑</th>
                             <th>时长</th>
-                            <!--<th>下载状态</th>-->
                         </tr>
                     </thead>
                     <tbody>
@@ -41,12 +39,6 @@
                             <td>{{ music.singer }}</td>
                             <td>《{{ music.album }}》</td>
                             <td>{{ music.time }}</td>
-                            <!--<td>
-                                <span v-show="music.error" class="download-state fail">下载失败</span>
-                                <span v-show="music.state === 1 && !music.error" class="download-state downloaded">已下载</span>
-                                <span v-show="music.state === -1 && !music.error" class="download-state wait">等待下载</span>
-                                <span v-show="music.state === 0 && !music.error" class="download-state ing">正在下载</span>
-                            </td>-->
                         </tr>
                     </tbody>
                 </table>

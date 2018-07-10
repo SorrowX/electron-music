@@ -21,7 +21,7 @@
                             width="40"
                             height="40"
                             draggable="false"
-                            :onerror="defaultPlayListCover"
+                            @error="handlerImgError($event)"
                         />
                     </td>
                     <td>{{ sheet.name }}</td>
@@ -50,11 +50,6 @@
                 }
             }
         },
-        data: function () {
-            return {
-                defaultPlayListCover: "this.src='../../../static/img/default-play-list-cover_40x40.png'"
-            }
-        },
         methods: {
             calcPlayCount(num) {
                 if (num >= 10000) {
@@ -65,6 +60,9 @@
             },
             showRecommendDetailsComponent(songSheet) {
                 this.detailsComp.showComp(songSheet.id)
+            },
+            handlerImgError($event) {
+                $event.target.src = require('../music-style/img/default-play-list-cover_40x40.png')
             }
         },
         mounted() {

@@ -9,7 +9,7 @@
                     <img
                         :src="songSheet.coverImgUrl + '?param=150x150'"
                         draggable="false"
-                        :onerror="defaultDetailCover"
+                        @error="handlerImgError($event)"
                     >
                     <div class="bottom">
                         <i class="icon-headset"></i>
@@ -46,8 +46,7 @@
                 recommendSongSheet: [], // 对象数组 {id, name, coverImgUrl, playCount}
                 loadingDetail: false,
                 loading: true,
-                error: false,
-                defaultDetailCover: "this.src='../../../static/img/default-album-cover_160x160.png'"
+                error: false
             }
         },
         methods: {
@@ -84,6 +83,9 @@
             },
             addToSheet(songSheetId) {
                 this.addToMySongSheet(songSheetId)
+            },
+            handlerImgError($event) {
+                $event.target.src = require('../music-style/img/default-album-cover_160x160.png')
             }
         },
         created() {

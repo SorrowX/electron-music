@@ -8,7 +8,6 @@ import { remote } from 'electron'
 const { Menu, MenuItem } = remote
 import fs from 'fs'
 
-
 let mySongListCurIndex = -1
 let delMySongListSongIdx = -1
 let curPlaySong = null
@@ -19,7 +18,7 @@ const SongMiXin = {
             curRowIndex: -1
         }
     },
-    computed: mapGetters(["mySongList", "audienceWaitSongList", "audienceAlreadyPlayedSongList"]),
+    computed: mapGetters(['mySongList', 'audienceWaitSongList', 'audienceAlreadyPlayedSongList']),
     methods: {
         /*
          * 播放在线歌曲(new)
@@ -52,7 +51,7 @@ const SongMiXin = {
         playLocalMusic(song) {
             if (!song.lyricObjData && song.localLyricSrc) {
                 try {
-                    song.lyricObjData = JSON.parse(fs.readFileSync(song.localLyricSrc, "utf8"))
+                    song.lyricObjData = JSON.parse(fs.readFileSync(song.localLyricSrc, 'utf8'))
                 } catch (e) {
                     song.lyricObjData = null
                 }
@@ -64,8 +63,8 @@ const SongMiXin = {
          * song Object 歌曲对象 { id, playSrc, name, singer, album, lyricObjData }
         */
         playOnlineMusicAndRemove(song) {
-            this.removeSong({ type: "audienceWaitSongList", id: song.id }) // 1.从等待列表中移除
-            this.addSong({ type: "audienceAlreadyPlayedSongList", song }) // 2.添加到已播列表
+            this.removeSong({ type: 'audienceWaitSongList', id: song.id }) // 1.从等待列表中移除
+            this.addSong({ type: 'audienceAlreadyPlayedSongList', song }) // 2.添加到已播列表
             this.$nextTick(() => {
                 this.playOnlineMusic(song)
             })
@@ -76,7 +75,7 @@ const SongMiXin = {
         */
         playOnlineMusicAndAdd(song) {
             mySongListCurIndex = this.getSongIdx({ type: 'mySongList', songId: song.id })
-            this.addSong({ type: "audienceAlreadyPlayedSongList", song }) // 1.添加到已播列表
+            this.addSong({ type: 'audienceAlreadyPlayedSongList', song }) // 1.添加到已播列表
             this.$nextTick(() => {
                 this.playOnlineMusic(song)
             })
@@ -98,15 +97,15 @@ const SongMiXin = {
                 await this.playOnlineMusic(music)
                 return music
             } else {
-                return "当前暂无可播的音乐"
+                return '当前暂无可播的音乐'
             }
         },
         _getSongFromWaitSongList() {
             let song = null
             if (this.audienceWaitSongList.length > 0) {
                 let music = this.audienceWaitSongList.slice(0)[0]
-                this.removeSong({ type: "audienceWaitSongList", id: music.id })
-                this.addSong({ type: "audienceAlreadyPlayedSongList", song: music })
+                this.removeSong({ type: 'audienceWaitSongList', id: music.id })
+                this.addSong({ type: 'audienceAlreadyPlayedSongList', song: music })
                 song = music
             }
             return song
@@ -115,7 +114,7 @@ const SongMiXin = {
             let song = null
             if (this.mySongList.length > 0) {
                 let music = this.mySongList.slice(0)[this._getMySongListCurIndex()]
-                this.addSong({ type: "audienceAlreadyPlayedSongList", song: music })
+                this.addSong({ type: 'audienceAlreadyPlayedSongList', song: music })
                 song = music
             }
             return song
@@ -138,8 +137,8 @@ const SongMiXin = {
                     musicList = musicList.filter((obj) => {
                         return obj.playSrc !== null || obj.playSrc == ''
                     })
-                    this.addSong({ type: "mySongList", song: musicList })
-                    this.$Message.info({ content: "已添加至我的歌单, 部分付费歌曲已过滤！" })
+                    this.addSong({ type: 'mySongList', song: musicList })
+                    this.$Message.info({ content: '已添加至我的歌单, 部分付费歌曲已过滤！' })
                     return resolve(musicList)
                 } else {
                     getRecommendSongSheetDetails(songSheetId).then(ret => {
@@ -147,8 +146,8 @@ const SongMiXin = {
                         musicList = musicList.filter((obj) => {
                             return obj.playSrc !== null || obj.playSrc == ''
                         })
-                        this.addSong({ type: "mySongList", song: ret.musicList })
-                        this.$Message.info({ content: "已添加至我的歌单, 部分付费歌曲已过滤！" })
+                        this.addSong({ type: 'mySongList', song: ret.musicList })
+                        this.$Message.info({ content: '已添加至我的歌单, 部分付费歌曲已过滤！' })
                         return resolve(ret.musicList)
                     })
                 }
@@ -160,26 +159,26 @@ const SongMiXin = {
         */
         collectSong(music) {
             if (music.playSrc == null || music.playSrc == '') {
-                this.$Message.error({ content: "付费歌曲, 添加失败!" })
+                this.$Message.error({ content: '付费歌曲, 添加失败!' })
             } else {
                 this.addSong({ type: "mySongList", song: music })
-                this.$Message.info({ content: "已添加至我的歌单!" })
+                this.$Message.info({ content: '已添加至我的歌单!' })
             }
         },
         registerMenu(options, index) {
-            let musicId = options["id"] // musicId
-            let song = options["song"] // 歌曲对象
-            let type = options["type"] // ['mySongList', 'audienceWaitSongList', 'audienceAlreadyPlayedSongList']
-            let cbs = options["cbs"] // ['play', 'del', 'clear', 'top']
-            let callback = options["callback"] // 删除和清空有回调
+            let musicId = options['id'] // musicId
+            let song = options['song'] // 歌曲对象
+            let type = options['type'] // ['mySongList', 'audienceWaitSongList', 'audienceAlreadyPlayedSongList']
+            let cbs = options['cbs'] // ['play', 'del', 'clear', 'top']
+            let callback = options['callback'] // 删除和清空有回调
             if (this.curRowIndex) {
                 this.curRowIndex = index
             }
             if (!this.menuInstance[musicId]) {
                 let menu = new Menu()
                 cbs.forEach(cbName => {
-                    let name = this.menuInfo[cbName]["label"]
-                    let cb = this.menuInfo[cbName]["cb"]
+                    let name = this.menuInfo[cbName]['label']
+                    let cb = this.menuInfo[cbName]['cb']
                     menu.append(
                         new MenuItem({
                             label: name,
@@ -194,9 +193,9 @@ const SongMiXin = {
             this.menuInstance[musicId].popup({ window: remote.getCurrentWindow() })
         },
         menuPlay(type, musicId, song) {
-            if (type === "audienceWaitSongList") {
+            if (type === 'audienceWaitSongList') {
                 this.playOnlineMusicAndRemove(song)
-            } else if ((type === "mySongList")) {
+            } else if ((type === 'mySongList')) {
                 this.playOnlineMusicAndAdd(song)
             } else {
                 this.playOnlineMusic(song)
@@ -260,26 +259,26 @@ const SongMiXin = {
         this.menuInstance = {} // 存放menu的实例
         this.menuInfo = {
             top: {
-                label: "置顶",
+                label: '置顶',
                 cb: this.menuTop
             },
             play: {
-                label: "播放",
+                label: '播放',
                 cb: this.menuPlay
             },
             del: {
-                label: "删除",
+                label: '删除',
                 cb: this.menuDel
             },
             clear: {
-                label: "清空",
+                label: '清空',
                 cb: this.menuClear
             }
         }
         this.$Message.config({ top: 280 })
     },
     mounted() {
-        this.playerComponent = this.$_live_getChildComponent(this.$root, "music-player")
+        this.playerComponent = this.$_live_getChildComponent(this.$root, 'music-player')
     }
 }
 

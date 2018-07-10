@@ -17,7 +17,7 @@
                     draggable="false"
                     width="150"
                     height="150"
-                    @error="handlerImgError"
+                    @error="handlerImgError($event)"
                 >
                 <h3>{{ songSheetData.songSheetName }}</h3>
                 <p>介绍：</p>
@@ -111,14 +111,13 @@
                 })
             },
             addToSheet(musicList) {
-                // this.$parent.addListToMyList(musicList)
                 this.addToMySongSheet(musicList)
             },
             toggleCollapse() {
                 this.descCollapsed = !this.descCollapsed
             },
             handlerImgError(evt) {
-                this.src = require('../music-style/img/default-album-cover_160x160.png')
+                evt.target.src = require('../music-style/img/default-album-cover_160x160.png')
             }
         }
     }

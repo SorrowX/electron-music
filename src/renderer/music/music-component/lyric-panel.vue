@@ -52,7 +52,7 @@
             isShow(bool) {
                 this.show = bool
                 if (bool) {
-                    this.SearchResultComponent.isShow(false)
+                    this.searchResultComponent.isShow(false)
                 }
             },
             toggleShow() {
@@ -117,7 +117,7 @@
             }
         },
         mounted() {
-            this.SearchResultComponent = this.$_live_getChildComponent(this.$root, "search-result")
+            this.searchResultComponent = this.$_live_getChildComponent(this.$root, "search-result")
         }
     }
 </script>
