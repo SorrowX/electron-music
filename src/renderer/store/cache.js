@@ -11,7 +11,7 @@ import { local, session } from '../music/music-util/storage'
  *             song: 歌曲对象|数组歌曲对象
  *         }
 */
-function addSongInCache({ type, song }) {
+export function addSongInCache({ type, song }) {
     let arr = local.getItem(type, [])
     if (Array.isArray(song)) {
         arr = arr.concat(song)
@@ -30,7 +30,7 @@ function addSongInCache({ type, song }) {
  *             song: 歌曲对象
  *         }
 */
-function updateSongInCache({ type, id, song }) {
+export function updateSongInCache({ type, id, song }) {
     let arr = local.getItem(type, [])
 
     let i = arr.findIndex(obj => {
@@ -55,7 +55,7 @@ function updateSongInCache({ type, id, song }) {
  *             id: '歌曲对象中的id|或者数组id',
  *         }
 */
-function removeSongInCache({ type, id }) {
+export function removeSongInCache({ type, id }) {
     let arr = local.getItem(type, [])
 
     if (typeof id === "string" || typeof id === "number") {
@@ -86,14 +86,14 @@ function removeSongInCache({ type, id }) {
  *             type: 'mySongList'|'audienceWaitSongList'|'audienceAlreadyPlayedSongList'
  *         }
 */
-function removeAllSongInCache({ type }) {
+export function removeAllSongInCache({ type }) {
     return local.setItem(type, [])
 }
 
 /*
  * 载入缓存歌曲列表数组中所有数据
 */
-function loadSongInCache({ type }) {
+export function loadSongInCache({ type }) {
     return local.getItem(type, [])
 }
 
@@ -104,7 +104,7 @@ function loadSongInCache({ type }) {
  *             id: '歌曲对象中的id'
  *         }
 */
-function moveSongInCache({ type, id }) {
+export function moveSongInCache({ type, id }) {
     let arr = local.getItem(type, [])
 
     let a = removeItem(arr, id)
@@ -125,13 +125,4 @@ function moveSongInCache({ type, id }) {
 
     local.setItem(type, arr)
     return arr
-}
-
-export {
-    addSongInCache,
-    updateSongInCache,
-    removeSongInCache,
-    removeAllSongInCache,
-    loadSongInCache,
-    moveSongInCache
 }

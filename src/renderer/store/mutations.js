@@ -2,8 +2,8 @@
  * Created by Sorrow.X on 2018/6/23.
  */
 
-const types = require("./mutation-types")
-const { remove } = require("../music/music-util/util")
+import types from './mutation-types'
+import { remove } from '../music/music-util/util'
 
 const mutations = {
     /*

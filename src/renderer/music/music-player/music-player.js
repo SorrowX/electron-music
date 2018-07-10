@@ -203,7 +203,7 @@ let mp = new MusicPlayer({
         songName: String, //'歌曲名',
         lyricData: Object //'歌词数据(从网易云的歌词文件中读取出来转为对象即可)'
     },
-    methods: { // 事件回调
+    callbacks: { // 事件回调
         currentTime(v) { // 当前歌曲的播放时间
             console.log('currentTime', v)
         },

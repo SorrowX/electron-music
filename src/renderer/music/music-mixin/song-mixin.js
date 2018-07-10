@@ -2,11 +2,12 @@
  * Created by Sorrow.X on 2018/6/26.
  */
 
-const { getOneSong, getSongInfoById, getRecommendSongSheetDetails } = require("../music-api/music-api")
-const { mapActions, mapGetters } = require("vuex")
-const { remote } = require("electron")
+import { getOneSong, getSongInfoById, getRecommendSongSheetDetails } from '../music-api/music-api'
+import { mapActions, mapGetters } from 'vuex'
+import { remote } from 'electron'
 const { Menu, MenuItem } = remote
-const fs = require("fs")
+import fs from 'fs'
+
 
 let mySongListCurIndex = -1
 let delMySongListSongIdx = -1

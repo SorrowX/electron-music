@@ -7,7 +7,7 @@ const REMOVE_SONG = 'REMOVE_SONG'
 const REMOVE_All_SONG = 'REMOVE_All_SONG'
 const MOVE_SONG = 'MOVE_SONG'
 
-export {
+export default {
     ADD_SONG,
     UPDATE_SONG,
     REMOVE_SONG,

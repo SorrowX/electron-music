@@ -2,7 +2,7 @@
  * Created by Sorrow.X on 2018/6/23.
  */
  
-const { loadSongInCache } = require('./cache.js')
+import { loadSongInCache } from './cache.js'
 
 const state = {
     mySongList: loadSongInCache({ type: 'mySongList' }), // 我的歌单数据
@@ -10,4 +10,4 @@ const state = {
     audienceAlreadyPlayedSongList: loadSongInCache({ type: 'audienceAlreadyPlayedSongList' }) // 观众歌单数据(已经播放)
 }
 
-module.exports = state
+export default state

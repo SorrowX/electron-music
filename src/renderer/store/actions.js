@@ -2,8 +2,8 @@
  * Created by Sorrow.X on 2018/6/23.
  */
 
-const types = require('./mutation-types')
-const { addSongInCache, updateSongInCache, removeSongInCache, removeAllSongInCache, moveSongInCache } = require('./cache.js')
+import types from './mutation-types'
+import { addSongInCache, updateSongInCache, removeSongInCache, removeAllSongInCache, moveSongInCache } from './cache.js'
 
 const addSong = function({ commit }, { type, song }) {
 	commit(types.ADD_SONG, { type, song })
