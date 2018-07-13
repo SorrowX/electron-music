@@ -11,9 +11,9 @@
                     <component ref="curComp" :is="currentTabComponent"></component>
                 </keep-alive>
             </div>
-            <music-lyric-panel></music-lyric-panel>
-            <search-result :searchKeywords="searchKeywords"></search-result>
-            <recommend-song-sheet-details></recommend-song-sheet-details>
+            <music-lyric-panel ref="musicLyricPanelComponent"></music-lyric-panel>
+            <search-result :searchKeywords="searchKeywords" ref="searchResultComponent"></search-result>
+            <recommend-song-sheet-details ref="recommendSongSheetDetailsComponent"></recommend-song-sheet-details>
         </main>
         <music-player></music-player>
     </div>
@@ -32,7 +32,7 @@
     import MusicLyricPanel from '@/music/music-component/lyric-panel'
 
     export default {
-        name: "Music",
+        name: 'Music',
         components: {
             MusicHeader,
             MusicNav,
@@ -47,16 +47,16 @@
         },
         data() {
             return {
-                currentTabComponent: "Audience",
-                searchKeywords: ""
+                currentTabComponent: 'Audience',
+                searchKeywords: ''
             }
         },
         methods: {
             switchTabComponent(index) {
-                this.searchResultComponent.isShow(false)
-                this.recommendSongSheetDetailsComponent.isShow(false)
-                this.musicLyricPanelComponent.isShow(false)
-                let tabComponent = ["Audience", "Me", "Recommend", "Hot"]
+                this.$refs.searchResultComponent.isShow(false)
+                this.$refs.recommendSongSheetDetailsComponent.isShow(false)
+                this.$refs.musicLyricPanelComponent.isShow(false)
+                let tabComponent = ['Audience', 'Me', 'Recommend', 'Hot']
                 this.currentTabComponent = tabComponent[index]
                 if (index === 2) {
                     this.$refs.curComp.getPlayListDataFormApi && this.$refs.curComp.getPlayListDataFormApi()
@@ -68,9 +68,7 @@
         },
         mounted() {
             this.$Message.config({ top: 180 })
-            this.searchResultComponent = this.$_live_getChildComponent(this.$root, "search-result")
-            this.musicLyricPanelComponent = this.$_live_getChildComponent(this.$root, "music-lyric-panel")
-            this.recommendSongSheetDetailsComponent = this.$_live_getChildComponent(this.$root, "recommend-song-sheet-details")
         }
     }
 </script>
+

@@ -100,7 +100,7 @@ export default class Api {
         const api = "/search"
         const url = `${DOMAIN}${api}`
         const params = `keywords=${keywords}&type=1`
-        const requestUrl = `${url}?${params}`
+        const requestUrl = `${url}?${params}&limit=60`
         return getData(requestUrl).then(response => {
             const { data } = response
             return data
@@ -111,7 +111,7 @@ export default class Api {
         const api = "/search"
         const url = `${DOMAIN}${api}`
         const params = `keywords=${keywords}&type=1000`
-        const requestUrl = `${url}?${params}`
+        const requestUrl = `${url}?${params}&limit=30`
         return getData(requestUrl).then(response => {
             const { data } = response
             return data

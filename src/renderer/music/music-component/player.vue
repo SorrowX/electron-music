@@ -198,6 +198,7 @@
             },
             playMusicFaild() { // 播放失败 ui重置
 
+                this.musicLyricPanelComponent.handlerSongError()
                 this.pauseMusic()
                 this.mp.setAudioSrc()
                 this.recoveryProgressUi()

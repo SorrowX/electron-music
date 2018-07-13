@@ -33,6 +33,14 @@ function getMusicLyricByMusicId(id) {
 }
 
 /**
+ * 通过歌曲ID获取歌曲详情
+ * @param {number|string} id   eg: 440208476
+ */
+function getMusicDetailByMusicid(id) {
+    return Api.get_musicdetail_by_musicid(id)
+}
+
+/**
  * 获取热门|新歌列表
  * @param {number} tag   0: 新歌列表 1: 热歌列表
  */
@@ -298,6 +306,13 @@ export async function getSongInfoById(id, song = {}) {
         song['playSrc'] = obj['url']
         song['time'] = calcTime((obj['size'] * 8) / obj['br'])
         song['needRemove'] = true
+    }
+
+    let musicInfo = await getMusicDetailByMusicid(id)
+    try {
+        song['picUrl'] = musicInfo['songs'][0]['al']['picUrl']
+    } catch(e) {
+        song['picUrl'] = ''
     }
 
     let lyricRet = await getMusicLyricByMusicId(id)
