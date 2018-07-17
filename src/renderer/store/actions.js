@@ -3,7 +3,7 @@
  */
 
 import types from './mutation-types'
-import { addSongInCache, updateSongInCache, removeSongInCache, removeAllSongInCache, moveSongInCache } from './cache.js'
+import { addSongInCache, updateSongInCache, removeSongInCache, removeAllSongInCache, moveSongInCache, setVolumeValueInCache } from './cache.js'
 
 const addSong = function({ commit }, { type, song }) {
 	commit(types.ADD_SONG, { type, song })
@@ -30,4 +30,9 @@ const moveSong = function({ commit }, { type, id }) {
 	moveSongInCache({ type, id })
 }
 
-export default { addSong, updateSong, removeSong, removeAllSong, moveSong }
+const setVolumeValue = function({ commit }, { value }) {
+	commit(types.SET_VOLUME_VALUE, { value })
+	setVolumeValueInCache({ value })
+}
+
+export default { addSong, updateSong, removeSong, removeAllSong, moveSong, setVolumeValue }

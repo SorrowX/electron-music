@@ -46,9 +46,9 @@
                 min="0"
                 step="1"
                 slot="list"
-                :value="volume"
+                :value="userVolumeVal"
                 @input="setVolume"
-                :style="{'background-size': volume + '% 4px'}"
+                :style="{'background-size': userVolumeVal + '% 4px'}"
             >
         </Dropdown>
     </div>
@@ -174,6 +174,7 @@
             setVolume(evt) { // 设置音量大小
                 let curVal = parseInt(evt.target.value)
                 this.volume = curVal
+                this.setVolumeValue({ value: curVal })
                 this.mp.setVolume(curVal / 100)
             },
             calcProgress(curSecond) { // 自动计算歌曲播放时对应时间的进度条
@@ -183,13 +184,18 @@
                     this.playTime = percent
                 }
             },
-            playMusic() { // 播放音乐
+            playMusic(isSpare) { // 播放音乐 isSpare:是否备用
                 this.curSongLoadState = 0
 
                 this.playState = true
                 this.noSongPlay = false
                 this.mp.play().catch((e) => {
-                    this.playNextMusic()
+                    console.log('播放失败: ', e)
+                    if (isSpare) { // 备用播放失败则播放下一首
+                        this.playNextMusic()
+                    } else { // 正式url播放失败则使用备用地址
+                        this.sparePlay()
+                    }
                 })
             },
             pauseMusic() { // 暂停音乐
@@ -225,6 +231,16 @@
                 let mp = this.mp.cutSong(playSrc, lyricData, songInfo, songName, singer)
                 this.musicLyricPanelComponent.initUi(mp.ly, songInfo)
                 this.playMusic()
+                this.sparePlay = this.sparePlayMusic(playSrc, lyricData, songInfo, songName, singer)
+            },
+            sparePlayMusic(playSrc, lyricData, songInfo, songName, singer) {
+                let self = this
+                return function() {
+                    self.musicLyricPanelComponent.recovery()
+                    let mp = self.mp.cutSong(songInfo.sparePlaySrc, lyricData, songInfo, songName, singer)
+                    self.musicLyricPanelComponent.initUi(mp.ly, songInfo)
+                    self.playMusic(true)
+                }
             },
             outsidePlayMusicChangeUi(song) {
                 this.songName = song.name
@@ -244,7 +260,7 @@
                         }
                     }).catch((e) => {
                         this.waiting = false
-                        // console.error('当前歌曲播放失败: ', e)
+                        console.error('当前歌曲播放失败: ', e)
                     })
                 }
             },

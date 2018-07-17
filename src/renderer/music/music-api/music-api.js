@@ -76,6 +76,7 @@ async function getMusicListResult(tag) {
         musicUrlRet.data.forEach((obj, index) => {
             let m = findArrItemById(musicList, obj.id)
             m['playSrc'] = obj['url']
+            m['sparePlaySrc'] = `http://music.163.com/song/media/outer/url?id=${obj['id']}.mp3`
             m['time'] = calcTime((obj['size'] * 8) / obj['br'])
         })
     }
@@ -174,6 +175,7 @@ async function getRecommendSongSheetDetailsResult(id) {
         musicUrlRet.data.forEach((obj, index) => {
             let m = findArrItemById(musicList, obj.id)
             m['playSrc'] = obj['url']
+            m['sparePlaySrc'] = `http://music.163.com/song/media/outer/url?id=${obj['id']}.mp3`
             m['time'] = calcTime((obj['size'] * 8) / obj['br'])
         })
     }
@@ -264,6 +266,7 @@ async function changeMusicList(songs) {
             musicUrlRet.data.forEach((obj, index) => {
                 let m = findArrItemById(musicList, obj.id)
                 m['playSrc'] = obj['url']
+                m['sparePlaySrc'] = `http://music.163.com/song/media/outer/url?id=${obj['id']}.mp3`
                 m['time'] = calcTime((obj['size'] * 8) / obj['br'])
             })
         }
@@ -291,7 +294,22 @@ export async function getOneSong(keywords) {
     if (songInfo.code === 200) {
         result = await changeMusicList(songInfo.result.songs)
     }
-    return result[0]
+    return getAvailableSong(result)
+}
+
+function getAvailableSong(arr) {
+    let song = null
+    let len = arr.length, i
+    for (i = 0; i < len; i++) {
+        let obj = arr[i]
+        if (obj['playSrc'] !== '' || obj['playSrc'] !== ' ') {
+            obj['sparePlaySrc'] = `http://music.163.com/song/media/outer/url?id=${obj['id']}.mp3`
+            song = obj
+            break
+        }
+    }
+    if (!song) { arr[0] }
+    return song
 }
 
 /**
@@ -304,6 +322,7 @@ export async function getSongInfoById(id, song = {}) {
     if (musicRet.code === 200) {
         let obj = musicRet['data'][0]
         song['playSrc'] = obj['url']
+        song['sparePlaySrc'] = `http://music.163.com/song/media/outer/url?id=${id}.mp3`
         song['time'] = calcTime((obj['size'] * 8) / obj['br'])
         song['needRemove'] = true
     }

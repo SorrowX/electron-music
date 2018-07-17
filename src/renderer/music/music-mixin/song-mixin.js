@@ -18,7 +18,7 @@ const SongMiXin = {
             curRowIndex: -1
         }
     },
-    computed: mapGetters(['mySongList', 'audienceWaitSongList', 'audienceAlreadyPlayedSongList']),
+    computed: mapGetters(['mySongList', 'audienceWaitSongList', 'audienceAlreadyPlayedSongList', 'userVolumeVal']),
     methods: {
         /*
          * 播放在线歌曲(new)
@@ -253,7 +253,7 @@ const SongMiXin = {
                 return mySongListCurIndex = -1
             }
         },
-        ...mapActions(["addSong", "updateSong", "removeSong", "removeAllSong", "moveSong"])
+        ...mapActions(['addSong', 'updateSong', 'removeSong', 'removeAllSong', 'moveSong', 'setVolumeValue'])
     },
     created() {
         this.menuInstance = {} // 存放menu的实例

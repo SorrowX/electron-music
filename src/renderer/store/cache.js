@@ -126,3 +126,11 @@ export function moveSongInCache({ type, id }) {
     local.setItem(type, arr)
     return arr
 }
+
+export function setVolumeValueInCache({ value }) {
+    return local.setItem('volumeValue', value)
+}
+
+export function getVolumeValueInCache() {
+    return local.getItem('volumeValue', 100)
+}

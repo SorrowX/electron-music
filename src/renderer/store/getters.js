@@ -5,9 +5,11 @@
 const mySongList = state => state.mySongList
 const audienceWaitSongList = state => state.audienceWaitSongList
 const audienceAlreadyPlayedSongList = state => state.audienceAlreadyPlayedSongList
+const userVolumeVal = state => state.userVolumeVal
 
 export default {
     mySongList,
     audienceWaitSongList,
-    audienceAlreadyPlayedSongList
+    audienceAlreadyPlayedSongList,
+    userVolumeVal
 }

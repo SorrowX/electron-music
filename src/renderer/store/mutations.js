@@ -101,6 +101,16 @@ const mutations = {
                 return remove(arr, arr[i])
             }
         }
+    },
+
+    /*
+     * 设置音量值大小
+     * params: obj: {
+     *             value: Number(0 - 100)
+     *         }
+    */
+    [types.SET_VOLUME_VALUE](state, { value }) {
+        state['userVolumeVal'] = value
     }
 }
 
