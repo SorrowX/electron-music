@@ -68,7 +68,7 @@
                 }
             },
             toggleShow() {
-                this.show = !this.show
+                return this.show = !this.show
             },
             initUi(lyricInstance, song) {
                 this.showImgBg = false
@@ -132,6 +132,7 @@
                 this.transform3d = "translate3d(0, " + 0 + "px, 0)"
             },
             switchBg(url) {
+                url = url || defaultBg
                 this.doImage.setSrc(this.$refs.bgDom, url)
             },
             handlerImage(localImgSrc, errorImgSrc) {

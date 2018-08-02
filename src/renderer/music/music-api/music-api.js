@@ -5,7 +5,6 @@
 import { extendDeep } from '../music-util/util'
 import Api from './api'
 
-
 const caclTimeError = '-- : --'
 
 /**
@@ -302,13 +301,13 @@ function getAvailableSong(arr) {
     let len = arr.length, i
     for (i = 0; i < len; i++) {
         let obj = arr[i]
-        if (obj['playSrc'] !== '' || obj['playSrc'] !== ' ') {
+        if (obj['playSrc'] !== null) {
             obj['sparePlaySrc'] = `http://music.163.com/song/media/outer/url?id=${obj['id']}.mp3`
             song = obj
             break
         }
     }
-    if (!song) { arr[0] }
+    if (!song) { song = arr[0] }
     return song
 }
 

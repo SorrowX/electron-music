@@ -3,7 +3,7 @@
  */
 
 <template>
-    <div class="player" id="player">
+    <div class="player" id="player" :style="lyricPlayStyle.playStyle">
         <div class="player-controls">
             <button class="btn-play" :class="{ 'hidden': playState }" @click="playMusic" :disabled="playBtnDisabledAttr"></button>
             <button class="btn-pause" :class="{ 'hidden': !playState }" @click="pauseMusic" :disabled="playBtnDisabledAttr"></button>
@@ -15,14 +15,14 @@
                     当前暂无正在播放的音乐，开启您的音乐之旅吧~
                 </template>
                 <template v-else-if="noSongPlay === false">
-                    <span class="name">{{ songName }}</span>
+                    <span class="name" :style="lyricPlayStyle.songNameStyle">{{ songName }}</span>
                     -
-                    <span class="artists">{{ singer }}</span>
+                    <span class="artists" :style="lyricPlayStyle.singerStyle">{{ singer }}</span>
                 </template>
-                <span class="time">
+                <span class="time" :style="lyricPlayStyle.timeStyle">
                     {{ currentPlayTime || "00:00" }} / {{ durationTime || "00:00"}}
                 </span>
-                <span class="player-lyric" @click="toggleLyricPanel">词</span>
+                <span class="player-lyric" @click="toggleLyricPanel" :style="lyricPlayStyle.playerLyricStyle">词</span>
             </p>
             <input
                 type="range"
@@ -36,7 +36,7 @@
                 @mousedown="handlerMouseDown"
                 @mouseup="handlerMouseUp"
                 :disabled="noSongPlay === true || songPlayFaild"
-                :style="{'background-size': playTime + '% 4px'}">
+                :style="[{'background-size': playTime + '% 4px'}, lyricPlayStyle.inputStyle]">
         </div>
         <Dropdown placement="top" trigger="click">
             <button class="btn-volume"></button>
@@ -59,6 +59,50 @@
     import SongMiXin from '../music-mixin/song-mixin'
     import { extendDeep } from '../music-util/util'
 
+    const defaultStyle = {
+        playStyle: {
+            'border-top': 'solid 1px #e8e8e8', // 'none'
+            'background': 'none' // '#242330'
+        },
+        songNameStyle: {
+            'color': '#333' // '#00BFFF'
+        },
+        singerStyle: {
+            'color': 'inherit' // '#8470FF'
+        },
+        timeStyle: {
+            'color': '#999' // '#fb910c'
+        },
+        playerLyricStyle: {
+            'border': '1px solid #eee' // '1px solid #fb910c'
+        },
+        inputStyle: {
+            'background-color': 'aliceblue' // '#6CA6CD'
+        }
+    }
+
+    const playerStyle = {
+        playStyle: {
+            'border-top': 'none',
+            'background': '#242330'
+        },
+        songNameStyle: {
+            'color': '#00BFFF'
+        },
+        singerStyle: {
+            'color': '#8470FF'
+        },
+        timeStyle: {
+            'color': '#fb910c'
+        },
+        playerLyricStyle: {
+            'border': '1px solid #fb910c'
+        },
+        inputStyle: {
+            'background-color': '#6CA6CD'
+        }
+    }
+
     export default {
         name: 'MusicPlayer',
         mixins: [ SongMiXin ],
@@ -74,6 +118,7 @@
                 songPlayFaild: false, // 歌曲播放失败
                 noSongPlay: true, // 一开始初始化, true: 无歌曲, false: audio有歌曲
                 curSongLoadState: 0, // 播放歌曲数据载入情况 0: 载入中 1: 载入成功 2: 载入失败
+                lyricPlayStyle: defaultStyle
             }
         },
         computed: {
@@ -116,7 +161,6 @@
                         },
 
                         curPlayLyric(error, curLyric, duration, parseLyricData) {
-                            // console.log(error, curLyric, duration, parseLyricData)
                             if (!error && error !== '') {
                                 self.musicLyricPanelComponent.scrollLyric(parseLyricData.curIndex)
                             } else {
@@ -136,7 +180,7 @@
                         },
 
                         error(e) {
-                            // console.log('error', e)
+                            // console.error('error', e)
                             self.curSongLoadState = 2
                         },
 
@@ -227,11 +271,11 @@
                 this.cutSong(playSrc, lyricData, songInfo, songName, singer)
             },
             cutSong(playSrc, lyricData, songInfo, songName, singer) { // 切歌
+                this.sparePlay = this.sparePlayMusic(playSrc, lyricData, songInfo, songName, singer)
                 this.musicLyricPanelComponent.recovery()
                 let mp = this.mp.cutSong(playSrc, lyricData, songInfo, songName, singer)
                 this.musicLyricPanelComponent.initUi(mp.ly, songInfo)
                 this.playMusic()
-                this.sparePlay = this.sparePlayMusic(playSrc, lyricData, songInfo, songName, singer)
             },
             sparePlayMusic(playSrc, lyricData, songInfo, songName, singer) {
                 let self = this
@@ -271,10 +315,11 @@
                 this._drag = false
             },
             toggleLyricPanel() {
-                this.musicLyricPanelComponent.toggleShow()
+                let isShow = this.musicLyricPanelComponent.toggleShow()
+                this.switchPlayerStyle(!isShow)
             },
             /*
-             * 该方法主要为了删除一首歌或者清空歌曲后，将播放下一首歌曲(提供给外部调用)
+             * 该方法主要为了删除一首歌或者清空歌曲后，将播放下一首歌曲
             */
             updateNextSongState() {
                 if (!this.mp.isPaused()) { // 说明歌曲正在播放(未播放则不做处理)
@@ -296,6 +341,10 @@
                 if (this.noSongPlay) {
                     this.playNextMusic()
                 }
+            },
+            switchPlayerStyle(isDefault) {
+                isDefault ? (this.lyricPlayStyle = defaultStyle)
+                          : (this.lyricPlayStyle = playerStyle)
             }
         },
         created() {
@@ -306,7 +355,7 @@
         mounted() {
             this.initPlayer()
             this.musicLyricPanelComponent = this.$_live_getChildComponent(this.$root, "music-lyric-panel")
-        },
+        }
     }
 </script>
 
@@ -316,5 +365,8 @@
         border: 1px solid #eee;
         margin-left: 10px;
         padding: 1px 4px;
+    }
+    .player {
+        transition: all .6s;
     }
 </style>
