@@ -135,7 +135,8 @@ const SongMiXin = {
                 if (Array.isArray(songSheetId)) {
                     let musicList = songSheetId
                     musicList = musicList.filter((obj) => {
-                        return obj.playSrc !== null || obj.playSrc == ''
+                        // return obj.playSrc !== null || obj.playSrc == ''
+                        return obj.id
                     })
                     this.addSong({ type: 'mySongList', song: musicList })
                     this.$Message.info({ content: '已添加至我的歌单, 部分付费歌曲已过滤！' })
@@ -158,7 +159,8 @@ const SongMiXin = {
          * songSheetId 歌单Id或者歌曲列表
         */
         collectSong(music) {
-            if (music.playSrc == null || music.playSrc == '') {
+            // if (music.playSrc == null || music.playSrc == '') {
+            if (!music.id) {
                 this.$Message.error({ content: '付费歌曲, 添加失败!' })
             } else {
                 this.addSong({ type: "mySongList", song: music })

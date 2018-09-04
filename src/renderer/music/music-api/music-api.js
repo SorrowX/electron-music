@@ -78,6 +78,13 @@ async function getMusicListResult(tag) {
             m['sparePlaySrc'] = `http://music.163.com/song/media/outer/url?id=${obj['id']}.mp3`
             m['time'] = calcTime((obj['size'] * 8) / obj['br'])
         })
+    } else {
+        idStr = idStr.split(',')
+        musicList.forEach((obj, index) => {
+            obj['playSrc'] = `http://music.163.com/song/media/outer/url?id=${obj['id']}.mp3`
+            obj['sparePlaySrc'] = `http://music.163.com/song/media/outer/url?id=${obj['id']}.mp3`
+            obj['time'] = ''
+        })
     }
     return musicList
 }
@@ -323,6 +330,11 @@ export async function getSongInfoById(id, song = {}) {
         song['playSrc'] = obj['url']
         song['sparePlaySrc'] = `http://music.163.com/song/media/outer/url?id=${id}.mp3`
         song['time'] = calcTime((obj['size'] * 8) / obj['br'])
+        song['needRemove'] = true
+    } else {
+        song['playSrc'] = `http://music.163.com/song/media/outer/url?id=${id}.mp3`
+        song['sparePlaySrc'] = `http://music.163.com/song/media/outer/url?id=${id}.mp3`
+        song['time'] = ''
         song['needRemove'] = true
     }
 
