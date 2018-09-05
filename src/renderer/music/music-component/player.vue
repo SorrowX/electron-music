@@ -355,6 +355,7 @@
         mounted() {
             this.initPlayer()
             this.musicLyricPanelComponent = this.$_live_getChildComponent(this.$root, "music-lyric-panel")
+            this.mp && this.mp.setVolume(this.userVolumeVal / 100)
         }
     }
 </script>
