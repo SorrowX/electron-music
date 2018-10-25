@@ -39,7 +39,7 @@ const SongMiXin = {
                     this.playerComponent.playMusicFaild()
                     this.$Message.info({ content: `播放歌曲 <${song.name}>,  失败！` })
                 }
-            }).catch(() => {
+            }).catch((e) => {
                 this.playerComponent.playMusicFaild()
                 this.$Message.info({ content: `播放歌曲 <${song.name}>,  失败！` })
             })
@@ -240,6 +240,7 @@ const SongMiXin = {
             }
         },
         delSongUpdateNextPlatSongIdx(delCurSongIdx, type) { // 删除歌曲后更新下一次播放歌曲索引
+            if (!curPlaySong) return
             if (curPlaySong.id === delCurSongIdx || delMySongListSongIdx < mySongListCurIndex) { // 删除当前正在播放的歌曲
                 if (type === 'mySongList') {
                     --mySongListCurIndex

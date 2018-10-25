@@ -57,7 +57,8 @@
 <script>
     import Player from '../music-player/music-player'
     import SongMiXin from '../music-mixin/song-mixin'
-    import { extendDeep } from '../music-util/util'
+    import { extendDeep, extend } from '../music-util/util'
+    import getImageMeanColor from '../music-util/get-image-mean-color'
 
     const defaultStyle = {
         playStyle: {
@@ -81,10 +82,12 @@
         }
     }
 
+    const playStyleBackground = '#242330'
+
     const playerStyle = {
         playStyle: {
             'border-top': 'none',
-            'background': '#242330'
+            'background': playStyleBackground
         },
         songNameStyle: {
             'color': '#00BFFF'
@@ -102,6 +105,9 @@
             'background-color': '#6CA6CD'
         }
     }
+
+    let curBgImgRGB = ''
+    let lyricPanelIsShow = false
 
     export default {
         name: 'MusicPlayer',
@@ -275,7 +281,24 @@
                 this.musicLyricPanelComponent.recovery()
                 let mp = this.mp.cutSong(playSrc, lyricData, songInfo, songName, singer)
                 this.musicLyricPanelComponent.initUi(mp.ly, songInfo)
+                this.pickupColor(songInfo['picUrl'])
                 this.playMusic()
+            },
+            pickupColor(url) {
+                let self = this
+                getImageMeanColor({
+                    imageUrl: url,
+                    clipHeight: '100%',
+                    skewPosition: 'top',
+                    minification: 10,
+                    cb: function(rgba, hsla, r, g, b, a, h, s, l) {
+                        // console.log('颜色值：', rgba, hsla)
+                        curBgImgRGB = rgba
+                        if (lyricPanelIsShow) {
+                            self.switchPlayerStyle(false)
+                        }
+                    }
+                })
             },
             sparePlayMusic(playSrc, lyricData, songInfo, songName, singer) {
                 let self = this
@@ -315,7 +338,7 @@
                 this._drag = false
             },
             toggleLyricPanel() {
-                let isShow = this.musicLyricPanelComponent.toggleShow()
+                let isShow = lyricPanelIsShow = this.musicLyricPanelComponent.toggleShow()
                 this.switchPlayerStyle(!isShow)
             },
             /*
@@ -343,14 +366,49 @@
                 }
             },
             switchPlayerStyle(isDefault) {
-                isDefault ? (this.lyricPlayStyle = defaultStyle)
-                          : (this.lyricPlayStyle = playerStyle)
+                if (isDefault) {
+                    this.lyricPlayStyle = defaultStyle
+                } else {
+                    this.lyricPlayStyle = playerStyle
+                }
+                this.handlerHeaderStyle(isDefault)
+            },
+            handlerHeaderStyle(isDefault) {
+                // return 如果rentu掉则不会根据拾取的颜色作为背景
+                if (isDefault) {
+                    this.$root.$emit('header-change-style', true)
+                } else {
+                    this.lyricPlayStyle['playStyle']['background'] = curBgImgRGB
+                    this.$root.$emit('header-change-style', false, {
+                        headerTagStyle: {
+                            background: curBgImgRGB
+                        },
+                        inputTagStyle: {
+                            background: curBgImgRGB,
+                            border: '1px solid #ccc'
+                        }
+                    })
+                }
+            },
+            handlerDbClickPanel() {
+                this.$root.$on('dbclick-panel', (isShowBgImg) => {
+                    if (isShowBgImg) {
+                        this.handlerHeaderStyle(false)
+                    } else { // 不显示背景图
+                        this.lyricPlayStyle = playerStyle
+                        this.lyricPlayStyle['playStyle']['background'] = playStyleBackground
+                        this.$root.$emit('header-change-style', true)
+                    }
+
+                })
             }
         },
         created() {
             this.playSrc = ''
             this.lyricData = {}
             this.waiting = false // 切换歌曲需要等待一个流程走完
+
+            this.handlerDbClickPanel()
         },
         mounted() {
             this.initPlayer()

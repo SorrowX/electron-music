@@ -6,7 +6,7 @@
         class="music-lyric-panel" 
         :style="[{opacity: calcOpacity}]" 
         ref="lyricPanelDom"
-        @dblclick="showImgBg = !showImgBg"
+        @dblclick="handlerDbClick"
     >   
         <transition name="bg-fade">
             <img class="bg-img" :src="backgroundUrl" ref="bgDom" v-show="showImgBg">
@@ -160,7 +160,16 @@
                 this.tip = true
                 this.lrcArr = []
                 this.tipMessage = '播放失败!'
+            },
+            handlerDbClick() {
+                this.showImgBg = !this.showImgBg
+                this.$root.$emit('dbclick-panel', this.showImgBg)
             }
+        },
+        created() {
+            this.$watch('showImgBg', (val) => {
+                this.$root.$emit('lyric-panel-is-show', val)
+            })
         },
         mounted() {
             this.searchResultComponent = this.$_live_getChildComponent(this.$root, 'search-result')
@@ -185,7 +194,7 @@
         vertical-align: middle;
         max-width: 798px;
         width: 100%;
-        /*filter: blur(3px);*/
+        filter: blur(1px);
     }
 
     .bg-fade-enter-active {
